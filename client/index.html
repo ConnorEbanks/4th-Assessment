@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body id="new" class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a Fortune</button>
+    <br>
+    <br>
+    <form id="form">
+      <input type="text" id="input">
+      <input type="submit">
+    </form>
+    <br>
+    <button id="button">Change Fortune</button>
+    <br>
+    <button id="button2">Delete Fortune</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.getElementById("complimentButton").onclick = function () {
+        axios.get("http://localhost:4000/api/compliment")
+            .then(function (response) {
+              const data = response.data;
+              alert(data);
+            });
+      };
+    </script>
+    <script>
+      document.getElementById("fortuneButton").onclick = function () {
+        axios.get("http://localhost:4000/api/fortune")
+            .then(function (res) {
+              const data = res.data;
+              alert(data);
+            });
+      };
+    </script>
+    <script>
+      document.getElementById("form").onsubmit = function (event) {
+        event.preventDefault()
+        axios.post("http://localhost:4000/api/fortune", document.getElementById('input').value)
+            .then(function (res) {
+              const data = res.data;
+              alert(data);
+            });
+      };
+    </script>
+    <script>
+      document.getElementById("button").onclick = function (event) {
+        event.preventDefault()
+        axios.put("http://localhost:4000/api/fortune/1", document.getElementById('input').value)
+            .then(function (res) {
+              const data = res.data;
+              alert(data);
+            });
+      };
+    </script>
+    <script>
+      document.getElementById("button2").onclick = function (event) {
+        event.preventDefault()
+        axios.delete("http://localhost:4000/api/fortune/5")
+            .then(function (res) {
+              const data = res.data;
+              alert(data);
+            });
+      };
+    </script>
+  </body>
+</html>
